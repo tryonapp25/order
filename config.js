@@ -5,9 +5,9 @@ export const config = {
 
 export const origins = [
   "http://localhost:5173",
-  "https://tryonapp.tech",
-  "https://dev.tryonapp.tech",
-  "https://www.tryonapp.tech"
+  "http://localhost:8080",
+  "https://api.prod.taply.dk",
+  "https://api.dev.taply.dk",
 ]
 
 export const orderStatus = {

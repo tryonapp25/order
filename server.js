@@ -19,19 +19,11 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
 // important for cookies from frontend
-const corsOptions = {
-  origin(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (origins.includes(origin)) return callback(null, true);
-    return callback(new Error(`CORS not allowed for origin: ${origin}`));
-  },
+app.use(cors({
+  origin: origins,
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+  methods: [ "GET" , "POST" , "PUT" , "DELETE" , "PATCH" , "OPTIONS" ]
+}));
 
 app.get('/connection', (req, res) => {
   res.status(200).json({

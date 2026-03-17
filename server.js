@@ -20,8 +20,18 @@ app.use(cookieParser());
 
 // important for cookies from frontend
 app.use(cors({
-  origin: origins,
+  origin: function (origin, callback) {
+    // allow non-browser requests / same-origin tools
+    if (!origin) return callback(null, true);
+
+    if (origins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS not allowed for origin: ${origin}`));
+  },
   credentials: true,
+  allowedHeaders: "*",
   methods: [ "GET" , "POST" , "PUT" , "DELETE" , "PATCH" , "OPTIONS" ]
 }));
 

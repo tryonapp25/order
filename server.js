@@ -22,11 +22,16 @@ app.use(cookieParser());
 app.use(cors({
   origin: origins,
   credentials: true,
-  methods: ["GET","POST","PUT","DELETE","PATCH","OPTIONS"]
+  methods: [ "GET" , "POST" , "PUT" , "DELETE" , "PATCH" , "OPTIONS" ]
 }));
 
 app.get('/connection', (req, res) => {
-    res.status(200).json({ message: 'Connection successful' });
+  res.status(200).json({
+    status: "success",
+    message: "🔌 Connection successful",
+    server: "🖥️ API Server running",
+    time: new Date().toISOString()
+  });
 });
 
 app.use('/', jwtMiddleware, router);
